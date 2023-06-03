@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Sell{% endblock %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+{{ add_item_form.hidden_tag() }}
+<nav class="navbar ms-auto bg-light border-top border-opacity-10">
+    {{ add_item_form.submit(class="btn btn-success ms-auto") }}
+</nav>
+
+<br>
+<div class="container">
+        <div class="card col" style="padding: 10%;">
+            <div class="card-body">
+                <h4 class="card-title mb-4" style="margin-bottom: 30px;">Add Product</h4>
+            <label>Add Product Image:</label>
+            <div class="file-upload">
+            <div class="image-upload-wrap">
+                <input class="file-upload-input" type='file' name="pic" onchange="readURL(this);" accept="image/*" />
+                <div class="drag-text">
+                <h3><i class="fa fa fa-download" aria-hidden="true"></i> Drag and drop a file or select add Image</h3>
+                </div>
+            </div>
+            
+            </div>
+
+            </div>
+        </div>
+        <br>
+        <div class="card col" style="padding-left: 10%; padding-right: 10%;">
+            <br>
+            {{ add_item_form.listing_title.label() }}
+            {{ add_item_form.listing_title(class="form-control", placeholder="Title of product") }}
+            {{ add_item_form.product_name.label() }}
+            {{ add_item_form.product_name(class="form-control", placeholder="Name of product")}}
+            {{ add_item_form.category.label(class='form-label') }}
+            {{ add_item_form.category(class="form-select", placeholder="Select product") }}
+            {{ add_item_form.mass.label(class='form-label') }}
+            {{ add_item_form.mass(class="form-control", placeholder="Mass") }}
+            {{ add_item_form.pricing.label(class='form-label') }}
+            {{ add_item_form.pricing(class="form-control", placeholder="Pricing") }}
+            {{ add_item_form.description.label(class='form-label') }}
+            {{ add_item_form.description(class='form-control', placeholder='Description(optional)', rows="9") }}
+
+            
+            {{ add_item_form.deal_method.label(class='form-label') }}
+            {{ add_item_form.deal_method(class="form-control", placeholder="Deal method") }}
+            
+            <br>
+
+            {{ add_item_form.submit(class="btn btn-success ms-auto") }}
+
+        </div>
+    </div>
+</div>
+
+</form>
+
+
+
+
+{% endblock %}

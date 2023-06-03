@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script>document.addEventListener('contextmenu', event => event.preventDefault());</script>
+</head>
+<body id="body" onload="pass();" style="display:none;">
+<nav class="navbar bg-light">
+  <form class="container-fluid">
+    <div class="input-group">
+      <span class="input-group-text material-symbols-outlined" id="basic-addon1">
+        search
+        </span>
+      <input type="text" class="form-control col-8" placeholder="Search for products" aria-label="Search" aria-describedby="basic-addon1">
+    </div>
+  </form>
+</nav>
+<br>
+
+{% if current_user.is_authenticated %}
+<h1>Welcome to Greensell, {{ current_user.username }}.</h1>
+{% endif %}
+
+{% if current_user.admin == 1 %}
+<h1>Dashboard</h1>
+<table class="table">
+  <thead>
+    <th scope="col">ID</th>
+    <th scope="col">Username</th>
+    <th scope="col">Email</th>
+    <th scope="col">Status</th>
+  </thead>
+
+{% for user in users %}
+{% if user.admin != 1 %}
+
+  {% if user.status == 'Enabled' %}
+  <tbody>
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email_address }}</td>
+      <td>{{ user.status }}</td>
+      <td>
+        <form action="{{url_for('user_disable', id=user.id)}}" method="POST">
+            <input type="submit" value="Disable Account" class="btn btn-outline btn-danger">
+        </form>
+    </td>
+    </tr>
+  </tbody>
+  {% elif user.status == 'Disabled' %}
+  <tbody>
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email_address }}</td>
+      <td>{{ user.status }}</td>
+      <td>
+        <form action="{{url_for('user_enable', id=user.id)}}" method="POST">
+            <input type="submit" value="Enable Account" class="btn btn-outline btn-success">
+        </form>
+    </td>
+    </tr>
+  </tbody>
+  {% endif %}
+  {% endif %}
+{% endfor %}
+</table>
+
+{% else %}
+{% if current_user.is_authenticated %}
+<h1>Welcome to Greensell, {{ current_user.username }}.</h1>
+{% endif %}
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{{ url_for('static', filename='images/vegetables.webp') }}" class="d-block w-100" height="500px" alt="hi1">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ url_for('static', filename='images/xinyuan.jpeg') }}" class="d-block w-100" height="500px" alt="hi2">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ url_for('static', filename='images/farm_shop.webp') }}" class="d-block w-100" height="500px" alt="hi2">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <br>
+ 
+<h1>Welcome to market!</h1>
+<br>
+<div class="row row-cols-3 g-4">
+{% for item in item_list %}
+<div class="col">
+    
+<div class="card" style="width: 18rem;">
+    <img src="{{url_for('get_img' , id = item.get_img())}}" class="card-img-top" alt="Image of {{ item.get_name() }}" width="300px" height="200px">
+    <div class="card-body">
+        <h3 class="card-title">{{ item.get_name() }}</h3>
+        <p class="card-text">{{ item.get_description() }}</p>    </div>
+    
+  </div>
+</div>
+  <br>
+
+
+
+
+{% endfor %}
+{% endif %}
+<script>
+  const p=''
+  function pass(){
+	  while (p != 'checked'){var p=prompt('Spam Checker, type "checked"');}
+	  var a = document.getElementById('body'); 
+	  a.style = "width:100%;"
+
+
+}
+</script>
+
+{% endblock %}

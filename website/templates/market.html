@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Product marketplace{% endblock %}
+
+{% block content %}
+<h1>Welcome to market!</h1>
+<br>
+
+
+<div class="d-flex h-space">
+
+
+  
+    {% for item in item_list %}
+    
+        
+      <div class="card" style="width:18em;">
+        <img src="{{ url_for('get_img' , id = item.get_img()) }}" class="card-img-top" alt="Image of {{ item.get_name() }}" height="50%" width="25%">
+        <div class="card-body">
+            <h3 class="card-title">{{ item.get_name() }}</h3>
+            <p>{{ item.get_id() }}</p>
+            <p class="card-text">{{ item.get_description() }}</p>
+
+            <form method="POST">
+              <a href="{{ url_for('update_item', id = item.get_id()) }}" class="btn btn-primary">Update Item</a>
+            </form>
+            <br>
+            <form method="post">
+              <a href="{{ url_for('delete_item', id = item.get_id()) }}" class="btn btn-danger">Delete Item</a>
+            </form>
+        </div>
+        
+      </div>
+    
+      
+    
+    <br>
+    <br>
+    {% endfor %}
+  
+</div>
+
+
+{% endblock %}
+

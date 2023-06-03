@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+  
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+  
+                  <form method="POST" class="mx-1 mx-md-4">
+                    {{ form.hidden_tag() }}
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.username(class='form-control form-control-user', placeholder='Username') }}
+                        {{ form.username.label() }}
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.email_address(class='form-control form-control-user', placeholder='Email Address') }}
+                        {{ form.email_address.label() }}
+                        </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.password1(class='form-control form-control-user', placeholder='Password', id="myInput") }}
+                        {{ form.password1.label() }}
+                        </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <!--Password2-->
+                        {{ form.password2(class='form-control form-control-user', placeholder='Repeat Password') }}
+                        {{ form.password2.label() }}
+                        </div>
+                    </div>
+                    <h6>View password<input type="checkbox" onclick="myFunction()"></h6><br>
+                    <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+
+  
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      {{ form.submit(class='btn btn-primary btn-lg btn-block') }}
+                    </div>
+
+                    <p>-Must be more than 8 Characters <br> -Must have lowercase letter <br> -Must have uppercase letter <br> -Must have digit <br> -Must have special character </p>
+                  </form>
+                  <hr>
+                    <div class="text-center">
+                        <a class="small" href="/forget_password">Forgot Password?</a>
+                    </div>
+                    <div class="text-center">
+                        <a class="small" href="/login_page">Already have an account? Login!</a>
+                    </div>
+  
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+  
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                    class="img-fluid" alt="Sample image">
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+    </script>
+
+
+
+{% endblock %}
